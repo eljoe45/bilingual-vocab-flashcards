@@ -33,6 +33,8 @@ const WORDS = [
 
 const CATEGORIES = ['All categories', ...new Set(WORDS.map(w => w.category))];
 const STORAGE_KEY = 'vocab-flashcards-known-v1';
+const CONFETTI_COLORS = ['#c2410c', '#fb923c', '#16a34a', '#f59e0b'];
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ---- State -----------------------------------------------------------
 let deck = [...WORDS];
@@ -80,6 +82,39 @@ function saveKnown() {
 
 function wordKey(word) {
   return `${word.category}::${word.en}`;
+}
+
+// ---- Confetti -----------------------------------------------------------
+// A small celebratory burst for "I know this" and correct quiz answers.
+// Respects prefers-reduced-motion and cleans up after itself.
+function fireConfetti(x, y) {
+  if (prefersReducedMotion) return;
+
+  const pieceCount = 22;
+  for (let i = 0; i < pieceCount; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = `${x}px`;
+    piece.style.top = `${y}px`;
+    piece.style.background = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
+
+    const angle = Math.random() * Math.PI * 2;
+    const distance = 50 + Math.random() * 90;
+    const tx = Math.cos(angle) * distance;
+    const ty = Math.sin(angle) * distance - 30; // bias upward a little
+
+    piece.style.setProperty('--tx', `${tx}px`);
+    piece.style.setProperty('--ty', `${ty}px`);
+    piece.style.setProperty('--rot', `${Math.random() * 720 - 360}deg`);
+
+    document.body.appendChild(piece);
+    piece.addEventListener('animationend', () => piece.remove());
+  }
+}
+
+function confettiFromElement(el) {
+  const rect = el.getBoundingClientRect();
+  fireConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2);
 }
 
 // ---- Setup -----------------------------------------------------------
@@ -134,6 +169,7 @@ function init() {
     known.add(wordKey(deck[index]));
     saveKnown();
     updateProgress();
+    confettiFromElement(knowItBtn);
     step(1);
   });
 
@@ -250,7 +286,9 @@ function handleAnswer(button, chosen, correctAnswer, optionsEl) {
     if (btn.textContent === correctAnswer) btn.classList.add('is-correct');
   });
 
-  if (chosen !== correctAnswer) {
+  if (chosen === correctAnswer) {
+    confettiFromElement(button);
+  } else {
     button.classList.add('is-wrong');
   }
 
@@ -268,4 +306,3 @@ function handleAnswer(button, chosen, correctAnswer, optionsEl) {
 }
 
 init();
-
