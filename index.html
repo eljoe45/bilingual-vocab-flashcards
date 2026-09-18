@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+  // Compact "embed mode" for when this app is shown inside an iframe
+  // (e.g. the live preview on eljoe45.github.io). Runs before paint.
+  if (new URLSearchParams(location.search).has('embed')) {
+    document.documentElement.classList.add('is-embed');
+  }
+</script>
 <title>Bilingual Vocab Flashcards — Dera Elvis</title>
 <meta name="description" content="A bilingual English/Spanish vocabulary flashcard and quiz app for classroom vocabulary, built while learning JavaScript.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -112,4 +119,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
