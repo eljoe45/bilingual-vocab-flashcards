@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bilingual Vocab Flashcards — Dera Elvis</title>
+<meta name="description" content="A bilingual English/Spanish vocabulary flashcard and quiz app for classroom vocabulary, built while learning JavaScript.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#top" class="logo">Vocab Flashcards</a>
+    <nav class="nav">
+      <a href="https://eljoe45.github.io" target="_blank" rel="noopener">← Portfolio</a>
+      <a href="https://github.com/eljoe45/bilingual-vocab-flashcards" target="_blank" rel="noopener">Code</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section id="top" class="hero">
+    <div class="container hero-inner">
+      <p class="eyebrow">Bilingual Vocab Flashcards</p>
+      <h1>Learn classroom words in English &amp; Spanish</h1>
+      <p class="hero-tagline">
+        Flip through everyday classroom vocabulary, mark what you know, and quiz
+        yourself on the rest. Built for English learners and the people who teach them.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <div class="controls">
+        <div class="control-group">
+          <label for="categorySelect">Category</label>
+          <select id="categorySelect"></select>
+        </div>
+        <div class="control-group">
+          <label for="directionSelect">Direction</label>
+          <select id="directionSelect">
+            <option value="en-es">English → Spanish</option>
+            <option value="es-en">Spanish → English</option>
+          </select>
+        </div>
+        <button id="shuffleBtn" class="btn btn-secondary" type="button">Shuffle</button>
+        <button id="resetBtn" class="btn btn-secondary" type="button">Reset progress</button>
+      </div>
+
+      <div class="progress-row">
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p class="progress-label" id="progressLabel">0 of 0 known</p>
+      </div>
+
+      <div class="card-stage">
+        <button class="card-nav" id="prevBtn" aria-label="Previous card">‹</button>
+
+        <div class="flashcard" id="flashcard" role="button" tabindex="0" aria-label="Flip card">
+          <div class="flashcard-inner" id="flashcardInner">
+            <div class="flashcard-face flashcard-front">
+              <p class="flashcard-category" id="frontCategory"></p>
+              <p class="flashcard-word" id="frontWord"></p>
+              <p class="flashcard-hint">Tap to reveal</p>
+            </div>
+            <div class="flashcard-face flashcard-back">
+              <p class="flashcard-category" id="backCategory"></p>
+              <p class="flashcard-word" id="backWord"></p>
+              <p class="flashcard-hint">Tap to flip back</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="card-nav" id="nextBtn" aria-label="Next card">›</button>
+      </div>
+
+      <p class="card-counter" id="cardCounter"></p>
+
+      <div class="know-actions">
+        <button id="stillLearningBtn" class="btn btn-outline" type="button">Still learning</button>
+        <button id="knowItBtn" class="btn btn-primary" type="button">I know this ✓</button>
+      </div>
+
+      <section class="quiz-section">
+        <h2 class="section-title-sm">Quiz mode</h2>
+        <p class="section-subtitle">Multiple choice, pulled from your current category.</p>
+        <div id="quizArea" class="quiz-area"></div>
+      </section>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>
+      &copy; <span id="year"></span> Dera Elvis. Part of my
+      <a href="https://eljoe45.github.io">learning-in-public portfolio</a>.
+    </p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
+
