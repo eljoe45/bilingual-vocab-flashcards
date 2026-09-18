@@ -3,8 +3,8 @@
   --color-bg-alt: #f6f7fb;
   --color-text: #1c1f26;
   --color-text-muted: #5b6270;
-  --color-primary: #4f46e5;
-  --color-primary-dark: #4338ca;
+  --color-primary: #c2410c;
+  --color-primary-dark: #9a3412;
   --color-success: #16a34a;
   --color-success-bg: #ecfdf3;
   --color-border: #e5e7eb;
@@ -413,6 +413,32 @@ h1, h2, h3 {
   margin-top: 4px;
 }
 
+/* Confetti */
+
+.confetti-piece {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 999;
+  will-change: transform, opacity;
+  animation: confetti-burst 800ms ease-out forwards;
+}
+
+@keyframes confetti-burst {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(0.6);
+    opacity: 0;
+  }
+}
+
 /* Mobile */
 
 @media (max-width: 560px) {
@@ -438,6 +464,8 @@ h1, h2, h3 {
     --color-bg-alt: #1a1d26;
     --color-text: #f1f2f6;
     --color-text-muted: #9aa0ac;
+    --color-primary: #fb923c;
+    --color-primary-dark: #f97316;
     --color-border: #2a2d38;
     --color-success-bg: #0f2a1c;
   }
@@ -462,4 +490,3 @@ h1, h2, h3 {
     background: #2a1418;
   }
 }
-
