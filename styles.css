@@ -439,6 +439,20 @@ h1, h2, h3 {
   }
 }
 
+/* Embed mode: compact widget view when shown inside an iframe */
+
+html.is-embed .site-header,
+html.is-embed .hero,
+html.is-embed .controls,
+html.is-embed .progress-row,
+html.is-embed .quiz-section {
+  display: none;
+}
+
+html.is-embed .section {
+  padding: 20px 0 24px;
+}
+
 /* Mobile */
 
 @media (max-width: 560px) {
